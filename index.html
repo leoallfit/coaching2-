@@ -406,10 +406,19 @@
   }
 
   async function submit() {
+    const sheetsURL = 'https://script.google.com/macros/s/AKfycbxXgfURiVDZVnxejd27LnCo9khqAXuWKVXXD1DVgPifYyMsZ6xeSb4U4B9LIdn_Vt2KGQ/exec';
     try {
       await fetch('https://formspree.io/f/maqadbrj', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+    } catch(e) {}
+    try {
+      await fetch(sheetsURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
     } catch(e) {}
